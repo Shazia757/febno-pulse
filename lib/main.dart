@@ -1,6 +1,7 @@
 import 'package:febno_pulse/config/theme/color_scheme.dart';
 import 'package:febno_pulse/config/theme/text_theme.dart';
 import 'package:febno_pulse/screens/login_screen.dart';
+import 'package:febno_pulse/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const LoginScreen(),
+      home: const SplashScreen(),
     );
   }
 }

@@ -91,14 +91,26 @@ class AccountController extends GetxController {
 
   //------------------Logout---------------------------//
 
-  void logout() async {
-    if (!isClosed) isLoading.value = true;
+ Future<void> logout() async {
+  if (isClosed) return;
 
+  isLoading.value = true;
+
+  try {
     usernameController.clear();
     passwordController.clear();
 
-    LocalStorage().clearAll();
+    await LocalStorage().clearAll();
+
+    if (isClosed) return;
 
     Get.offAll(() => const LoginScreen());
+  } catch (e) {
+    debugPrint('Logout error: $e');
+  } finally {
+    if (!isClosed) {
+      isLoading.value = false;
+    }
   }
+}
 }
