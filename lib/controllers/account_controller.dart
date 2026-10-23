@@ -7,6 +7,11 @@ import 'package:get/get.dart';
 
 class AccountController extends GetxController {
   var errorMessage = ''.obs;
+  var usernameError = ''.obs;
+  var passwordError = ''.obs;
+
+  var obscurePassword = true.obs;
+
   var isLoading = false.obs;
 
   final usernameController = TextEditingController();
@@ -16,16 +21,24 @@ class AccountController extends GetxController {
 
   Future<void> login() async {
     errorMessage.value = '';
+    passwordError.value = '';
 
-    await LocalStorage().clearToken();
-
-    final username = usernameController.text;
+    final username = usernameController.text.trim();
     final password = passwordController.text;
 
     if (username.isEmpty || password.isEmpty) {
-      Get.snackbar("Error", "Please fill all fields");
+      if (username.isEmpty) {
+        usernameError.value = 'Please enter your username';
+      }
+
+      if (password.isEmpty) {
+        passwordError.value = 'Please enter your password';
+      }
+
       return;
     }
+
+    if (isLoading.value) return;
 
     isLoading.value = true;
 
@@ -34,32 +47,40 @@ class AccountController extends GetxController {
         'username': username,
         'password': password,
       });
+
       if (isClosed) return;
-      if (response is LoginResponse) {
-        await LocalStorage().writeUser(response.data ?? Users());
 
-        await LocalStorage().writeToken(
-          response.accessToken ?? '',
-          response.refreshToken ?? '',
-        );
-
-        usernameController.clear();
-        passwordController.clear();
-
-        // CustomWidgets.showSnackBar(
-        //   'Welcome',
-        //   '${user.name}',
-        //   icon: const Icon(Icons.login, color: Color(0xFF1976D2), size: 20),
-        // );
-        // Get.offAll(() => const HomeScreen());
-      } else {
-        errorMessage.value = response?.message ?? 'Failed to login!';
-        // CustomWidgets.showSnackBar('Error', errorMessage.value);
+      if (response is! LoginResponse) {
+        errorMessage.value = 'Invalid login response';
+        return;
       }
+
+      final accessToken = response.accessToken;
+
+      if (accessToken == null || accessToken.isEmpty) {
+        errorMessage.value = 'Access token was not returned';
+        return;
+      }
+
+      await LocalStorage().writeUser(response.data ?? Users());
+
+      await LocalStorage().writeToken(accessToken, response.refreshToken ?? '');
+
+      if (isClosed) return;
+
+      usernameController.clear();
+      passwordController.clear();
+      usernameError.value = '';
+      passwordError.value = '';
+
+      debugPrint('Login successful');
+
+      // Navigate after successful login:
+      // Get.offAll(() => const HomeScreen());
     } catch (e) {
       if (!isClosed) {
-        errorMessage.value = 'Login error: $e';
-        // CustomWidgets.showSnackBar('Error', errorMessage.value);
+        errorMessage.value = 'Login failed. Please try again.';
+        debugPrint('Login exception: $e');
       }
     } finally {
       if (!isClosed) {
@@ -78,6 +99,6 @@ class AccountController extends GetxController {
 
     LocalStorage().clearAll();
 
-   Get.offAll(() => const LoginScreen());
+    Get.offAll(() => const LoginScreen());
   }
 }

@@ -27,7 +27,14 @@ class Api {
   Future<dynamic> login(Map<String, dynamic> data) async {
     try {
       final response = await http
-          .post(Uri.parse(Urls.login), body: jsonEncode(data))
+          .post(
+            Uri.parse(Urls.login),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: jsonEncode(data),
+          )
           .timeout(const Duration(seconds: 60));
 
       final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
