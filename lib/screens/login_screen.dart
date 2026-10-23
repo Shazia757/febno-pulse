@@ -225,22 +225,6 @@ class _LoginScreenState extends State<LoginScreen>
 
                                   const SizedBox(height: 28),
                                   Obx(() {
-                                    final message = c.errorMessage.value;
-
-                                    if (message.isEmpty) {
-                                      return const SizedBox.shrink();
-                                    }
-
-                                    return Text(
-                                      message,
-                                      style: TextStyle(
-                                        color: Theme.of(
-                                          context,
-                                        ).colorScheme.error,
-                                      ),
-                                    );
-                                  }),
-                                  Obx(() {
                                     final isLoading = c.isLoading.value;
 
                                     return SizedBox(

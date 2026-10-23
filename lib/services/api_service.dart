@@ -29,10 +29,7 @@ class Api {
       final response = await http
           .post(
             Uri.parse(Urls.login),
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            },
+            headers: await getHeader(),
             body: jsonEncode(data),
           )
           .timeout(const Duration(seconds: 60));
@@ -50,7 +47,7 @@ class Api {
         }
         return loginResponse;
       }
-      return parseError(responseJson);
+      return getError(responseJson);
     } catch (e) {
       checkConnectivity();
       log('Api error during login: $e');
@@ -58,4 +55,5 @@ class Api {
 
     return null;
   }
+
 }

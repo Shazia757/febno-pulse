@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:developer';
 
@@ -9,7 +8,6 @@ class LocalStorage {
   static const FlutterSecureStorage _storage =
       FlutterSecureStorage();
 
- // Save user data
   Future<void> writeUser(Users user) async {
     try {
       await _storage.write(
@@ -26,7 +24,6 @@ class LocalStorage {
     }
   }
 
-  // Save access and refresh tokens
   Future<void> writeToken(
     String access,
     String refresh,
@@ -46,7 +43,6 @@ class LocalStorage {
     }
   }
 
-  // Read access token
   Future<String?> readAccessToken() async {
     try {
       return await _storage.read(key: 'access');
@@ -56,7 +52,6 @@ class LocalStorage {
     }
   }
 
-  // Read refresh token
   Future<String?> readRefreshToken() async {
     try {
       return await _storage.read(key: 'refresh');
@@ -66,24 +61,6 @@ class LocalStorage {
     }
   }
 
-  // Read user data
-  // Future<Users?> readUser() async {
-  //   try {
-  //     final data = await _storage.read(key: 'user');
-
-  //     if (data == null) return null;
-
-  //     final Map<String, dynamic> json =
-  //         jsonDecode(data) as Map<String, dynamic>;
-
-  //     return Users.fromJson(json);
-  //   } catch (e) {
-  //     log('Error reading user: $e');
-  //     return null;
-  //   }
-  // }
-
-  // Read login status
   Future<bool> isLoggedIn() async {
     try {
       return await _storage.read(key: 'isLoggedIn') == 'true';
@@ -93,13 +70,11 @@ class LocalStorage {
     }
   }
 
-  // Clear only tokens
   Future<void> clearToken() async {
     await _storage.delete(key: 'access');
     await _storage.delete(key: 'refresh');
   }
 
-  // Clear everything stored securely
   Future<void> clearAll() async {
     await _storage.deleteAll();
   }

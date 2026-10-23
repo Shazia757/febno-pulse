@@ -1,5 +1,6 @@
 import 'package:febno_pulse/database/local_storage.dart';
 import 'package:febno_pulse/models/user_model.dart';
+import 'package:febno_pulse/screens/home_screen.dart';
 import 'package:febno_pulse/screens/login_screen.dart';
 import 'package:febno_pulse/services/api_service.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class AccountController extends GetxController {
 
   Future<void> login() async {
     errorMessage.value = '';
+    usernameError.value = '';
     passwordError.value = '';
 
     final username = usernameController.text.trim();
@@ -34,7 +36,14 @@ class AccountController extends GetxController {
       if (password.isEmpty) {
         passwordError.value = 'Please enter your password';
       }
-
+      Get.snackbar(
+        'Validation Error',
+        username.isEmpty && password.isEmpty
+            ? 'Please enter your username and password.'
+            : username.isEmpty
+            ? 'Please enter your username.'
+            : 'Please enter your password.',
+      );
       return;
     }
 
@@ -51,14 +60,16 @@ class AccountController extends GetxController {
       if (isClosed) return;
 
       if (response is! LoginResponse) {
-        errorMessage.value = 'Invalid login response';
+        errorMessage.value = 'Invalid username or password';
+        Get.snackbar('Login Failed', errorMessage.value);
         return;
       }
 
       final accessToken = response.accessToken;
 
       if (accessToken == null || accessToken.isEmpty) {
-        errorMessage.value = 'Access token was not returned';
+        errorMessage.value = 'Invalid username or password';
+        Get.snackbar('Login Failed', errorMessage.value);
         return;
       }
 
@@ -72,14 +83,16 @@ class AccountController extends GetxController {
       passwordController.clear();
       usernameError.value = '';
       passwordError.value = '';
-
-      debugPrint('Login successful');
-
-      // Navigate after successful login:
-      // Get.offAll(() => const HomeScreen());
+      errorMessage.value = '';
+      Get.offAll(() => const HomeScreen());
     } catch (e) {
       if (!isClosed) {
         errorMessage.value = 'Login failed. Please try again.';
+        Get.snackbar(
+          'Login Failed',
+          errorMessage.value,
+          duration: const Duration(seconds: 3),
+        );
         debugPrint('Login exception: $e');
       }
     } finally {
@@ -91,26 +104,26 @@ class AccountController extends GetxController {
 
   //------------------Logout---------------------------//
 
- Future<void> logout() async {
-  if (isClosed) return;
-
-  isLoading.value = true;
-
-  try {
-    usernameController.clear();
-    passwordController.clear();
-
-    await LocalStorage().clearAll();
-
+  Future<void> logout() async {
     if (isClosed) return;
 
-    Get.offAll(() => const LoginScreen());
-  } catch (e) {
-    debugPrint('Logout error: $e');
-  } finally {
-    if (!isClosed) {
-      isLoading.value = false;
+    isLoading.value = true;
+
+    try {
+      usernameController.clear();
+      passwordController.clear();
+
+      await LocalStorage().clearAll();
+
+      if (isClosed) return;
+
+      Get.offAll(() => const LoginScreen());
+    } catch (e) {
+      debugPrint('Logout error: $e');
+    } finally {
+      if (!isClosed) {
+        isLoading.value = false;
+      }
     }
   }
-}
 }

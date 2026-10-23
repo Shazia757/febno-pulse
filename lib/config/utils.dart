@@ -19,7 +19,7 @@ Future<void> checkConnectivity() async {
   }
 }
 
-String parseError(Map<String, dynamic> json) {
+String getError(Map<String, dynamic> json) {
   if (json['detail'] != null) {
     return json['detail'].toString();
   }
