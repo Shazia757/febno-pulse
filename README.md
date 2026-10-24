@@ -106,7 +106,7 @@ flutter build apk --release
 The generated APK is available at:
 
 ```text
-build/app/outputs/flutter-apk/app-release.apk
+build/app/outputs/flutter-apk/Febno-pulse.apk
 ```
 
 ## Application Flow
