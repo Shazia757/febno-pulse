@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:febno_pulse/database/local_storage.dart';
+import 'package:febno_pulse/screens/home_screen.dart';
 import 'package:febno_pulse/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -81,13 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     if (!mounted) return;
 
-    Get.offAll(
-      () =>
-          //  isLoggedIn
-          //     ? const HomeScreen()
-          //     :
-          const LoginScreen(),
-    );
+    Get.offAll(() => isLoggedIn ? HomeScreen( ) : const LoginScreen());
   }
 
   @override

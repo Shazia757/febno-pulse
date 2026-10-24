@@ -39,6 +39,8 @@ dependencies:
   flutter_secure_storage: ^11.2.0
   connectivity_plus: ^7.3.2
   google_fonts: ^8.2.1
+  responsive_framework: ^1.5.1
+  animated_bottom_navigation_bar: ^1.4.1
 
 dev_dependencies:
   flutter_test:

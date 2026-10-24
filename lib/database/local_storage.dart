@@ -43,6 +43,22 @@ class LocalStorage {
     }
   }
 
+  Future<Users?> readUser() async {
+  try {
+    final userData = await _storage.read(key: 'user');
+
+    if (userData == null || userData.isEmpty) {
+      return null;
+    }
+
+    final Map<String, dynamic> json = jsonDecode(userData);
+    return Users.fromJson(json);
+  } catch (e) {
+    log('Error reading user: $e');
+    return null;
+  }
+}
+
   Future<String?> readAccessToken() async {
     try {
       return await _storage.read(key: 'access');

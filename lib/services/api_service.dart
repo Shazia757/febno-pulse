@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:febno_pulse/config/urls.dart';
 import 'package:febno_pulse/config/utils.dart';
 import 'package:febno_pulse/database/local_storage.dart';
+import 'package:febno_pulse/models/attendance_model.dart';
 import 'package:febno_pulse/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -56,4 +57,23 @@ class Api {
     return null;
   }
 
+  Future<List<Attendance>?> getTransactions() async {
+    try {
+      final response = await http
+          .get(Uri.parse(Urls.transactions), headers: await getHeader())
+          .timeout(const Duration(seconds: 60));
+      final decoded = jsonDecode(response.body);
+      if (decoded is List) {
+        return decoded.map((item) {
+          return Attendance.fromJson(Map<String, dynamic>.from(item as Map));
+        }).toList();
+      }
+      log('Unexpected API response format: ${response.body}');
+      return null;
+    } catch (e) {
+      checkConnectivity();
+      log('Api error getting transactions: $e');
+    }
+    return null;
+  }
 }

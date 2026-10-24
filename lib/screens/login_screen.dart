@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen>
                               'Every workday, in sync.',
                               textAlign: TextAlign.center,
                               style: tt.bodyMedium?.copyWith(
-                                color: cs.onPrimary.withOpacity(0.78),
+                                color: cs.onPrimary.withValues(alpha: 0.78),
                               ),
                             ),
 
@@ -162,11 +162,11 @@ class _LoginScreenState extends State<LoginScreen>
                                 color: cs.surface,
                                 borderRadius: BorderRadius.circular(28),
                                 border: Border.all(
-                                  color: cs.outline.withOpacity(0.12),
+                                  color: cs.outline.withValues(alpha: 0.12),
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.10),
+                                    color: Colors.black.withValues(alpha: 0.10),
                                     blurRadius: 30,
                                     offset: const Offset(0, 12),
                                   ),
@@ -183,7 +183,9 @@ class _LoginScreenState extends State<LoginScreen>
                                     'Sign in to manage your attendance '
                                     'and stay connected.',
                                     style: tt.bodySmall?.copyWith(
-                                      color: cs.onSurface.withOpacity(0.65),
+                                      color: cs.onSurface.withValues(
+                                        alpha: 0.65,
+                                      ),
                                     ),
                                   ),
 
@@ -234,6 +236,8 @@ class _LoginScreenState extends State<LoginScreen>
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: cs.primary,
                                           foregroundColor: cs.onPrimary,
+                                          disabledBackgroundColor: cs.primary,
+                                          disabledForegroundColor: cs.onPrimary,
                                           elevation: 0,
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(

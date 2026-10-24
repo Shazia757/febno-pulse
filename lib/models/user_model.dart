@@ -40,7 +40,15 @@ class Users {
       'is_accountant': isAccountant,
     };
   }
+
+  String get role {
+  if (isSuperuser == true) return 'Super Admin';
+  if (isManager == true) return 'Manager';
+  if (isAccountant == true) return 'Accountant';
+  return 'Employee';
 }
+}
+
 class LoginResponse {
   String? accessToken;
   String? refreshToken;

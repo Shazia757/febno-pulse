@@ -68,7 +68,7 @@ class CustomTextField extends StatelessWidget {
                       ? cs.error
                       : isFocused.value
                       ? cs.primary
-                      : cs.outline.withOpacity(0.6),
+                      : cs.outline.withValues(alpha: 0.6),
                   width: 1.2,
                 ),
               ),
@@ -84,7 +84,7 @@ class CustomTextField extends StatelessWidget {
                   prefixIcon: Icon(prefixIcon, color: cs.primary),
                   hintText: hint,
                   hintStyle: textTheme.bodyMedium?.copyWith(
-                    color: cs.onSurface.withOpacity(0.6),
+                    color: cs.onSurface.withValues(alpha: 0.6),
                   ),
                   border: InputBorder.none,
                   contentPadding: const EdgeInsets.symmetric(
@@ -125,7 +125,7 @@ class CustomTextField extends StatelessWidget {
               Text(
                 helperText!,
                 style: textTheme.bodySmall?.copyWith(
-                  color: cs.onSurface.withOpacity(0.6),
+                  color: cs.onSurface.withValues(alpha: 0.6),
                 ),
               ),
           ],
