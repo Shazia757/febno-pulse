@@ -53,15 +53,11 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   borderRadius: const BorderRadius.vertical(
-                    bottom: Radius.circular(30),
+                    bottom: Radius.circular(20),
                   ),
                 ),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    final companyName = c.employees.isNotEmpty
-                        ? (c.employees.first.companyName ?? 'Company')
-                        : 'Company';
-
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -171,141 +167,6 @@ class HomeScreen extends StatelessWidget {
                             }),
                           ],
                         ),
-
-                        const SizedBox(height: 26),
-
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(18),
-                          decoration: BoxDecoration(
-                            color: cs.onPrimary.withValues(alpha: 0.10),
-                            borderRadius: BorderRadius.circular(22),
-                            border: Border.all(
-                              color: cs.onPrimary.withValues(alpha: 0.16),
-                            ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 42,
-                                    height: 42,
-                                    decoration: BoxDecoration(
-                                      color: cs.onPrimary.withValues(
-                                        alpha: 0.13,
-                                      ),
-                                      borderRadius: BorderRadius.circular(13),
-                                    ),
-                                    child: Icon(
-                                      Icons.business_rounded,
-                                      color: cs.onPrimary,
-                                      size: 22,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'YOUR ORGANIZATION',
-                                          style: tt.labelSmall?.copyWith(
-                                            color: cs.onPrimary.withValues(
-                                              alpha: 0.70,
-                                            ),
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 1.1,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          companyName,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: tt.titleMedium?.copyWith(
-                                            color: cs.onPrimary,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 17,
-                                ),
-                                child: Divider(
-                                  height: 1,
-                                  color: cs.onPrimary.withValues(alpha: 0.18),
-                                ),
-                              ),
-
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 42,
-                                    height: 42,
-                                    decoration: BoxDecoration(
-                                      color: cs.onPrimary.withValues(
-                                        alpha: 0.13,
-                                      ),
-                                      borderRadius: BorderRadius.circular(13),
-                                    ),
-                                    child: Icon(
-                                      Icons.schedule_rounded,
-                                      color: cs.onPrimary,
-                                      size: 22,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "TODAY'S OVERVIEW",
-                                          style: tt.labelSmall?.copyWith(
-                                            color: cs.onPrimary.withValues(
-                                              alpha: 0.70,
-                                            ),
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 1.1,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Wrap(
-                                          crossAxisAlignment:
-                                              WrapCrossAlignment.center,
-                                          spacing: 6,
-                                          runSpacing: 6,
-                                          children: [
-                                            Text(
-                                              formatDateTime(DateTime.now()),
-                                              style: tt.bodySmall?.copyWith(
-                                                color: cs.onPrimary.withValues(
-                                                  alpha: 0.82,
-                                                ),
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
                       ],
                     );
                   },
@@ -318,6 +179,120 @@ class HomeScreen extends StatelessWidget {
                   child: Center(child: CircularProgressIndicator()),
                 )
               else ...[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
+                  child: Container(
+                    padding: const EdgeInsets.all(18),
+                    decoration: BoxDecoration(
+                      color: cs.primaryContainer.withValues(alpha: 0.45),
+                      borderRadius: BorderRadius.circular(22),
+                      border: Border.all(
+                        color: cs.primary.withValues(alpha: 0.12),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 44,
+                              height: 44,
+                              decoration: BoxDecoration(
+                                color: cs.primary.withValues(alpha: 0.10),
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                              child: Icon(
+                                Icons.business_rounded,
+                                color: cs.primary,
+                                size: 23,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'YOUR ORGANIZATION',
+                                    style: tt.labelSmall?.copyWith(
+                                      color: cs.onSurfaceVariant,
+                                      letterSpacing: 1,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    c.employees.isNotEmpty
+                                        ? (c.employees.first.companyName ??
+                                              'Company')
+                                        : 'Company',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: tt.titleMedium?.copyWith(
+                                      color: cs.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Divider(
+                            height: 1,
+                            color: cs.outline.withValues(alpha: 0.25),
+                          ),
+                        ),
+
+                        Row(
+                          children: [
+                            Container(
+                              width: 44,
+                              height: 44,
+                              decoration: BoxDecoration(
+                                color: cs.primary.withValues(alpha: 0.10),
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                              child: Icon(
+                                Icons.schedule_rounded,
+                                color: cs.primary,
+                                size: 23,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "TODAY'S OVERVIEW",
+                                    style: tt.labelSmall?.copyWith(
+                                      color: cs.onSurfaceVariant,
+                                      letterSpacing: 1,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    formatDateTime(DateTime.now()),
+                                    style: tt.bodyMedium?.copyWith(
+                                      color: cs.primary,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 1.1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
                   child: Text(
@@ -394,10 +369,9 @@ class HomeScreen extends StatelessWidget {
 
         actions: [
           TextButton(
-            onPressed: accountController.isLoading.value
-                ? null
-                : () => Navigator.pop(dialogContext, false),
-            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(dialogContext, false),
+          child: const Text('Cancel'),
+        
           ),
           Obx(() {
             final isLoading = accountController.isLoading.value;
@@ -426,4 +400,5 @@ class HomeScreen extends StatelessWidget {
       await accountController.logout();
     }
   }
+
 }
