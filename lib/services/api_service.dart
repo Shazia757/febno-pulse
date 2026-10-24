@@ -50,7 +50,6 @@ class Api {
       }
       return getError(responseJson);
     } catch (e) {
-      checkConnectivity();
       log('Api error during login: $e');
     }
 
@@ -71,7 +70,6 @@ class Api {
       log('Unexpected API response format: ${response.body}');
       return null;
     } catch (e) {
-      checkConnectivity();
       log('Api error getting transactions: $e');
     }
     return null;

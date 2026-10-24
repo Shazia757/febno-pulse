@@ -101,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
                                 child: Text(
                                   name.isNotEmpty ? name[0].toUpperCase() : '?',
                                   style: tt.headlineLarge?.copyWith(
-                                    color: Colors.white,
+                                    color: cs.primary,
                                   ),
                                 ),
                               ),
@@ -113,7 +113,7 @@ class ProfileScreen extends StatelessWidget {
                                 name.isNotEmpty ? name : 'User',
                                 textAlign: TextAlign.center,
                                 style: tt.headlineSmall?.copyWith(
-                                  color: Colors.white,
+                                  color: cs.onPrimary,
                                   letterSpacing: -0.3,
                                 ),
                               ),
@@ -125,14 +125,14 @@ class ProfileScreen extends StatelessWidget {
                                 vertical: 5,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.18),
+                                color: cs.onPrimary.withValues(alpha: 0.18),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
                                 user?.role ?? 'Employee',
                                 textAlign: TextAlign.center,
                                 style: tt.titleSmall?.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.9),
+                                  color: cs.onPrimary.withValues(alpha: 0.9),
                                   letterSpacing: 0.3,
                                 ),
                               ),

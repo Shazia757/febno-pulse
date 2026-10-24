@@ -12,12 +12,7 @@ Future<Map<String, String>> getHeader([String? token]) async {
   };
 }
 
-Future<void> checkConnectivity() async {
-  final connectivityResult = await Connectivity().checkConnectivity();
-  if (connectivityResult.contains(ConnectivityResult.none)) {
-    // Get.to(() => NoInternetScreen());
-  }
-}
+
 
 String getError(Map<String, dynamic> json) {
   if (json['detail'] != null) {

@@ -14,7 +14,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    loadDummyData();
+    fetchEmployeeAttendance();
   }
 
   int get inCount =>
@@ -32,58 +32,6 @@ class HomeController extends GetxController {
       .toSet()
       .length;
 
-  void loadDummyData() {
-    isLoading.value = true;
-
-    employees.assignAll([
-      Attendance(
-        id: '1',
-        personName: 'Arun Kumar',
-        employeeId: 'EMP001',
-        punchTime: '2026-10-23T09:00:00+05:30',
-        punchStatus: 'IN',
-        checkinWhatsappSent: true,
-        checkoutWhatsappSent: false,
-        absentWhatsappSent: false,
-        sourceSystem: 'Biometric',
-        companyName: "Technodot Academy of R&D&I",
-      ),
-      Attendance(
-        id: '2',
-        personName: 'Rahul Das',
-        employeeId: 'EMP002',
-        punchTime: '2026-10-23T17:30:00+05:30',
-        punchStatus: 'OUT',
-        checkinWhatsappSent: true,
-        checkoutWhatsappSent: true,
-        absentWhatsappSent: false,
-        sourceSystem: 'Biometric',
-      ),
-      Attendance(
-        id: '3',
-        personName: 'Priya Nair',
-        employeeId: 'EMP003',
-        punchTime: '2026-10-23T09:15:00+05:30',
-        punchStatus: 'IN',
-        checkinWhatsappSent: true,
-        checkoutWhatsappSent: false,
-        absentWhatsappSent: false,
-        sourceSystem: 'Manual',
-      ),
-      Attendance(
-        id: '4',
-        personName: 'Vishnu Raj',
-        employeeId: 'EMP004',
-        punchTime: '2026-10-23T08:55:00+05:30',
-        punchStatus: 'ABSENT',
-        checkinWhatsappSent: false,
-        checkoutWhatsappSent: false,
-        absentWhatsappSent: true,
-        sourceSystem: 'Manual',
-      ),
-    ]);
-    isLoading.value = false;
-  }
 
   Future<void> fetchEmployeeAttendance() async {
     if (isClosed) return;

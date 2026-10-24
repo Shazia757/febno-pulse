@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTextTheme {
   AppTextTheme._();
 
-  // Inter — primary font for the application
   static TextTheme get interTextTheme {
     return GoogleFonts.interTextTheme(
       const TextTheme(
@@ -91,14 +90,12 @@ class AppTextTheme {
     );
   }
 
-  // Roboto — for Material-style or specialized UI components
   static TextTheme get robotoTextTheme {
     return GoogleFonts.robotoTextTheme(
       interTextTheme,
     );
   }
 
-  // Convenient font families for individual widgets
   static TextStyle inter({
     double fontSize = 14,
     FontWeight fontWeight = FontWeight.w400,

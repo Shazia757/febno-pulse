@@ -82,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     if (!mounted) return;
 
-    Get.offAll(() => isLoggedIn ? HomeScreen( ) : const LoginScreen());
+    Get.offAll(() => isLoggedIn ? HomeScreen() : const LoginScreen());
   }
 
   @override
@@ -132,25 +132,43 @@ class _SplashScreenState extends State<SplashScreen>
                   Positioned(
                     top: -65 + (t * 22),
                     right: -45,
-                    child: _glowCircle(
-                      size: 210,
-                      color: cs.onPrimary.withValues(alpha: 0.07),
+                    child: IgnorePointer(
+                      child: Container(
+                        width: 210,
+                        height: 210,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: cs.onPrimary.withValues(alpha: 0.07),
+                        ),
+                      ),
                     ),
                   ),
                   Positioned(
                     bottom: 80 - (t * 28),
                     left: -85,
-                    child: _glowCircle(
-                      size: 180,
-                      color: cs.secondary.withValues(alpha: 0.16),
+                    child: IgnorePointer(
+                      child: Container(
+                        width: 180,
+                        height: 180,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: cs.secondary.withValues(alpha: 0.16),
+                        ),
+                      ),
                     ),
                   ),
                   Positioned(
                     top: MediaQuery.sizeOf(context).height * 0.28,
                     right: 28 + (t * 12),
-                    child: _glowCircle(
-                      size: 34,
-                      color: cs.onPrimary.withValues(alpha: 0.09),
+                    child: IgnorePointer(
+                      child: Container(
+                        width: 34,
+                        height: 34,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: cs.onPrimary.withValues(alpha: 0.09),
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -158,7 +176,6 @@ class _SplashScreenState extends State<SplashScreen>
             },
           ),
 
-          // Main splash content.
           SafeArea(
             child: Center(
               child: FadeTransition(
@@ -168,7 +185,6 @@ class _SplashScreenState extends State<SplashScreen>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Animated app logo.
                       AnimatedBuilder(
                         animation: _logoController,
                         builder: (context, child) {
@@ -218,7 +234,6 @@ class _SplashScreenState extends State<SplashScreen>
                                 ),
                               ),
 
-                              // Pulse / waveform brand symbol.
                               Icon(
                                 Icons.graphic_eq_rounded,
                                 size: 53,
@@ -231,7 +246,6 @@ class _SplashScreenState extends State<SplashScreen>
 
                       const SizedBox(height: 28),
 
-                      // App name.
                       Text(
                         'FebnoPulse',
                         style: tt.headlineMedium?.copyWith(
@@ -243,7 +257,6 @@ class _SplashScreenState extends State<SplashScreen>
 
                       const SizedBox(height: 10),
 
-                      // Tagline.
                       Text(
                         'Every workday, in sync.',
                         textAlign: TextAlign.center,
@@ -255,7 +268,6 @@ class _SplashScreenState extends State<SplashScreen>
 
                       const SizedBox(height: 42),
 
-                      // Animated loading indicator.
                       SizedBox(
                         width: 30,
                         height: 30,
@@ -272,7 +284,6 @@ class _SplashScreenState extends State<SplashScreen>
             ),
           ),
 
-          // Bottom caption.
           Positioned(
             left: 0,
             right: 0,
@@ -290,16 +301,6 @@ class _SplashScreenState extends State<SplashScreen>
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _glowCircle({required double size, required Color color}) {
-    return IgnorePointer(
-      child: Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(shape: BoxShape.circle, color: color),
       ),
     );
   }
